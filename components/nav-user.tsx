@@ -1,5 +1,3 @@
-"use client";
-
 import { BadgeCheck, Bell, ChevronsUpDown, User } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,11 +11,10 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
-
-import { useSession } from "@/context/session-context";
+import { useSession } from "@/context/SessionContext";
 import SignOutButton from "./sign-out-button";
 
-export function NavUser() {
+export default function NavUser() {
 	const { isMobile } = useSidebar();
 	const { user } = useSession();
 

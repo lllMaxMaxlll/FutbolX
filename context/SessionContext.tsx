@@ -4,13 +4,13 @@ import { Session, User } from "@/types";
 import { createContext, useContext } from "react";
 
 type SessionContextType = {
-	user: User | undefined | null;
-	session: Session | undefined | null;
+	user: User | null;
+	session: Session | null;
 };
 
 const SessionContext = createContext<SessionContextType>({
-	user: undefined,
-	session: undefined,
+	user: null,
+	session: null,
 });
 
 export const useSession = () => useContext(SessionContext);

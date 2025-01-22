@@ -4,9 +4,9 @@ import * as React from "react";
 import { Calendar, LifeBuoy, Send, Trophy, Users } from "lucide-react";
 import { PiSoccerBallFill } from "react-icons/pi";
 
-import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
+import NavMain from "@/components/nav-main";
+import NavSecondary from "@/components/nav-secondary";
+import NavUser from "@/components/nav-user";
 import {
 	Sidebar,
 	SidebarContent,
@@ -73,7 +73,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<NavMain items={data.navMain} />
 				<NavSecondary items={data.navSecondary} className="mt-auto" />
 			</SidebarContent>
-			<SidebarFooter>{/* <NavUser /> */}</SidebarFooter>
+			<SidebarFooter>
+				<NavUser />
+			</SidebarFooter>
 		</Sidebar>
 	);
 }

@@ -15,7 +15,7 @@ const SignOutButton = () => {
 	};
 
 	return (
-		<div className="inline-flex gap-2" onClick={handleSignOut}>
+		<div className="inline-flex gap-2 items-center" onClick={handleSignOut}>
 			<LogOut />
 			Cerrar sesion
 		</div>
