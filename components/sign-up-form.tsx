@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { getErrorMessage } from "@/lib/auth-client";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -49,7 +50,8 @@ export default function SignUpForm() {
 					setIsLoading(false);
 				},
 				onError: (ctx) => {
-					toast.error(`Error: ${ctx.error.message}`);
+					toast.error(`Error: ${getErrorMessage(ctx.error.code)}`);
+					setIsLoading(false);
 				},
 			}
 		);
@@ -127,7 +129,7 @@ export default function SignUpForm() {
 								/>
 
 								<Button type="submit" className="w-full" disabled={isLoading}>
-									{isLoading ? <LoaderCircle className="animate-spin" /> : "Iniciar sesion"}
+									{isLoading ? <LoaderCircle className="animate-spin" /> : "Crear cuenta"}
 								</Button>
 							</div>
 						</form>

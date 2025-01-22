@@ -4,7 +4,7 @@ import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { authClient } from "@/lib/auth-client";
+import { authClient, getErrorMessage } from "@/lib/auth-client";
 
 import { toast } from "sonner";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -42,7 +42,7 @@ export default function SignInForm() {
 					form.reset();
 				},
 				onError: (ctx) => {
-					toast.error(`Error: ${ctx.error.message}`);
+					toast.error(`Error: ${getErrorMessage(ctx.error.code)}`);
 					setIsLoading(false);
 				},
 			}
