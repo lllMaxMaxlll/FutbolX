@@ -36,7 +36,7 @@ export const getErrorMessage = (code: string) => {
 	if (code in errorCodes) {
 		return errorCodes[code as keyof typeof errorCodes];
 	}
-	return "";
+	return "Hubo un error";
 };
 
 export const { signIn, signUp, useSession } = createAuthClient();

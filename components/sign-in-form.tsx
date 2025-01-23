@@ -42,7 +42,7 @@ export default function SignInForm() {
 					form.reset();
 				},
 				onError: (ctx) => {
-					toast.error(`Error: ${getErrorMessage(ctx.error.code)}`);
+					toast.error(getErrorMessage(ctx.error.code));
 					setIsLoading(false);
 				},
 			}
