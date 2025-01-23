@@ -1,5 +1,5 @@
 import { getServerSession } from "@/actions/authActions";
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/app/dashboard/(components)/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { SessionProvider } from "@/context/SessionContext";
 import React from "react";

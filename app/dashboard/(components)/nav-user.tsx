@@ -12,7 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 import { useSession } from "@/context/SessionContext";
-import SignOutButton from "./sign-out-button";
+import SignOutButton from "@/app/(auth)/(components)/sign-out-button";
+import Link from "next/link";
 
 export default function NavUser() {
 	const { isMobile } = useSidebar();
@@ -60,10 +61,12 @@ export default function NavUser() {
 
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<BadgeCheck />
-								Cuenta
-							</DropdownMenuItem>
+							<Link href="/dashboard/settings">
+								<DropdownMenuItem>
+									<BadgeCheck />
+									Cuenta
+								</DropdownMenuItem>
+							</Link>
 
 							<DropdownMenuItem>
 								<Bell />
