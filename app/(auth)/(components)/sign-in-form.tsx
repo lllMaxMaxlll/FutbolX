@@ -35,14 +35,14 @@ export default function SignInForm() {
 			{ email, password, callbackURL: "/dashboard" },
 			{
 				onRequest: () => {
-					toast.loading("Iniciando sesion...");
+					toast("Iniciando sesion...");
 					setIsLoading(true);
 				},
 				onSuccess: () => {
 					form.reset();
 				},
 				onError: (ctx) => {
-					toast.error(getErrorMessage(ctx.error.code));
+					toast.error(getErrorMessage(ctx.error.code) ?? "Algo salió mal");
 					setIsLoading(false);
 				},
 			}
@@ -83,7 +83,7 @@ export default function SignInForm() {
 										<FormItem className="grid gap-2">
 											<div className="flex justify-between items-center">
 												<FormLabel htmlFor="password">Contraseña</FormLabel>
-												<Link href="#" className="ml-auto inline-block text-sm underline">
+												<Link href="/forgot-password" className="ml-auto inline-block text-sm underline">
 													Olvidaste tu contraseña?
 												</Link>
 											</div>

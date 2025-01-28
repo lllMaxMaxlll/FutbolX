@@ -2,7 +2,6 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -12,7 +11,6 @@ import { authClient } from "@/lib/auth-client";
 import { updateNameFormSchema } from "@/schemas";
 import { User } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { LoaderCircle, User2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -116,7 +114,7 @@ const ChangeNameForm = ({ user }: { user: User }) => {
 						/>
 						<div className="space-y-2">
 							<Label htmlFor="email">Email</Label>
-							<Input disabled type="email" placeholder={user?.email} />
+							<Input disabled type="email" placeholder={user?.email || ""} />
 						</div>
 
 						<Button type="submit" className="my-4 w-20" disabled={isLoading}>

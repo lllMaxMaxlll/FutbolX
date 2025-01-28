@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import SettingsForm from "@/app/dashboard/settings/(components)/settings-form";
 
 export const metadata: Metadata = {
-	title: "Account Settings",
-	description: "Manage your account settings and preferences.",
+	title: "Configuracion de usuario",
+	description: "Administra las opciones del usuario.",
 };
 
 export default async function SettingsPage() {

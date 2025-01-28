@@ -43,15 +43,16 @@ export default function SignUpForm() {
 			{
 				onRequest: () => {
 					setIsLoading(true);
-					toast.loading("Creando usuario...");
+					toast("Creando usuario...");
 				},
 				onSuccess: () => {
 					form.reset();
 					setIsLoading(false);
+					toast.success("Usuario creado correctamente. Por favor, verifica tu correo electrónico para continuar.");
 				},
 				onError: (ctx) => {
 					console.log(ctx.error);
-					toast.error(getErrorMessage(ctx.error.code));
+					toast.error(getErrorMessage(ctx.error.code) ?? "Algo salió mal");
 					setIsLoading(false);
 				},
 			}

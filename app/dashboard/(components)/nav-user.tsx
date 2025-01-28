@@ -1,5 +1,4 @@
 import { BadgeCheck, Bell, ChevronsUpDown, User2 } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -11,7 +10,6 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
-// import { useSession } from "@/context/SessionContext";
 import SignOutButton from "@/app/(auth)/(components)/sign-out-button";
 import Link from "next/link";
 import { useUser } from "@/context/UserContext";
@@ -33,8 +31,8 @@ export default function NavUser() {
 								</AvatarFallback>
 							</Avatar>
 							<div className="grid flex-1 text-left text-sm leading-tight">
-								<span className="truncate font-semibold">{user?.name}</span>
-								<span className="truncate text-xs">{user?.email}</span>
+								<span className="truncate font-semibold">{user?.name || "Usuario"}</span>
+								<span className="truncate text-xs">{user?.email || "Email"}</span>
 							</div>
 							<ChevronsUpDown className="ml-auto size-4" />
 						</SidebarMenuButton>
@@ -53,8 +51,8 @@ export default function NavUser() {
 									</AvatarFallback>
 								</Avatar>
 								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-semibold">{user?.name}</span>
-									<span className="truncate text-xs">{user?.email}</span>
+									<span className="truncate font-semibold">{user?.name || "Usuario"}</span>
+									<span className="truncate text-xs">{user?.email || "Email"}</span>
 								</div>
 							</div>
 						</DropdownMenuLabel>

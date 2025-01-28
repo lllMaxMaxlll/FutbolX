@@ -47,3 +47,22 @@ export const updatePasswordFormSchema = z
 		message: "Las contraseñas no coinciden.",
 		path: ["confirmPassword"],
 	});
+
+export const forgotPasswordFormSchema = z.object({
+	email: z.string().email({
+		message: "Por favor, ingresa un correo electrónico válido.",
+	}),
+});
+
+export const resetPasswordForSchema = z
+	.object({
+		password: z
+			.string()
+			.min(8, { message: "Tu contraseña debe contener al menos 8 caracteres" })
+			.regex(/[a-zA-Z0-9]/, { message: "Tu contraseña debe contener al menos un número" }),
+		confirmPassword: z.string(),
+	})
+	.refine((data) => data.password === data.confirmPassword, {
+		message: "Las contraseñas no coinciden.",
+		path: ["confirmPassword"],
+	});

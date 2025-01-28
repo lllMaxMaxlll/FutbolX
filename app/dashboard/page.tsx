@@ -10,8 +10,8 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-
 import { Users, Trophy, Calendar, Star } from "lucide-react";
+import { Metadata } from "next";
 
 const matches = [
 	{ date: "2023-06-15", time: "14:00", team1: "Team A", team2: "Team B" },
@@ -33,6 +33,17 @@ const results = [
 	{ date: "2023-06-08", team1: "Team E", score1: 3, team2: "Team F", score2: 2 },
 	{ date: "2023-06-07", team1: "Team G", score1: 1, team2: "Team H", score2: 4 },
 ];
+
+export const metadata: Metadata = {
+	title: "Dashboard | TourneyMate",
+	description: "Ver estadisticas de torneos, proximos encuentros y resultados recientes",
+	keywords: ["deportes", "liga", "estadisticas", "partidos", "resultados", "dashboard", "futbol"],
+	openGraph: {
+		title: "TourneyMate Dashboard",
+		description: "Ver estadisticas de torneos, proximos encuentros y resultados recientes",
+		type: "website",
+	},
+};
 
 const DashboardClient = () => {
 	return (

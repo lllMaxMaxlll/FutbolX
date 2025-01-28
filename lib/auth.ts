@@ -3,7 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js"; // automatically set cookies
 // import { emailHarmony } from "better-auth-harmony"; //email normalization and additional validation, blocking temporary email domains.
-import { sendVerificationEmail } from "@/actions/emailActions";
+import { sendEmail } from "@/actions/emailActions";
 
 const prisma = new PrismaClient();
 
@@ -16,16 +16,28 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,
+		sendResetPassword: async ({ user, url }) => {
+			await sendEmail({
+				to: user.email,
+				subject: "Reestablecer contraseña",
+				text: `Click en el link para restablecer tu contraseña: ${url}`,
+			});
+		},
 	},
 	emailVerification: {
 		enabled: true,
 		sendOnSignUp: true,
 		autoSignInAfterVerification: true,
 		sendVerificationEmail: async ({ user, token }) => {
-			// Send verification email
-			await sendVerificationEmail({ user, token });
+			const verificationUrl = `${process.env.BETTER_AUTH_URL}/api/auth/verify-email?token=${token}&callbackURL=${process.env.EMAIL_VERIFICATION_CALLBACK_URL}`;
+			await sendEmail({
+				to: user.email,
+				subject: "Verifica tu email",
+				text: `Click en el link para verificar tu email: ${verificationUrl}`,
+			});
 		},
 	},
+
 	// socialProviders: {
 	// 	github: {
 	// 		clientId: process.env.GITHUB_CLIENT_ID,
