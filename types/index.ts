@@ -1,20 +1,4 @@
-export type User = {
-	id: string;
-	name: string;
-	email: string;
-	emailVerified: boolean;
-	image?: string | null | undefined;
-	createdAt: Date;
-	updatedAt: Date;
-};
+import { auth } from "@/lib/auth";
 
-export type Session = {
-	id: string;
-	expiresAt: Date;
-	token: string;
-	createdAt: Date;
-	updatedAt: Date;
-	ipAddress?: string | null | undefined;
-	userAgent?: string | null | undefined;
-	userId: string;
-};
+export type Session = typeof auth.$Infer.Session | null;
+export type User = typeof auth.$Infer.Session.user | null;

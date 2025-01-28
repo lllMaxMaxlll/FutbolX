@@ -1,45 +1,69 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useSession } from "@/context/SessionContext";
+import { useUser } from "@/context/UserContext";
+import { authClient } from "@/lib/auth-client";
 import { updateNameFormSchema } from "@/schemas";
+import { User } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "lucide-react";
-import { useActionState, useEffect } from "react";
+
+import { LoaderCircle, User2 } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const ChangeNameForm = () => {
-	const { user } = useSession();
-	// const [error, action, isPending] = useActionState(onSubmitPassword, null);
+const ChangeNameForm = ({ user }: { user: User }) => {
+	const { setUser } = useUser();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const form = useForm<z.infer<typeof updateNameFormSchema>>({
 		resolver: zodResolver(updateNameFormSchema),
 		defaultValues: {
 			name: user?.name || "",
 			image: "",
-			theme: "system",
 		},
 	});
 
 	async function onSubmitName(values: z.infer<typeof updateNameFormSchema>) {
-		// For now, we'll just simulate an API call with a timeout
-		console.log("Submited name");
-		toast("Nombre actualizado");
-	}
+		const { name, image } = values;
 
-	useEffect(() => {
-		if (user) {
-			form.reset({
-				name: user.name,
-				image: user?.image || "",
-			});
-		}
-	}, [user, form]);
+		await authClient.updateUser(
+			{
+				image,
+				name,
+			},
+			{
+				onRequest: () => {
+					setIsLoading(true);
+					toast("Actualizando información...");
+				},
+				onSuccess: () => {
+					toast.success("Información actualizada correctamente");
+					setUser((prev) => {
+						if (!prev) return null; // Handle null case if needed
+						return {
+							...prev,
+							name,
+							image,
+						};
+					});
+					setIsLoading(false);
+				},
+				onError: (ctx) => {
+					toast.error("Error al actualizar la información");
+					console.log(ctx.error);
+					setIsLoading(false);
+				},
+			}
+		);
+	}
 
 	return (
 		<Card className="border-0">
@@ -62,7 +86,7 @@ const ChangeNameForm = () => {
 											<Avatar className="w-20 h-20">
 												<AvatarImage src={field.value || undefined} alt="Imagen de perfil" />
 												<AvatarFallback>
-													<User className="w-10 h-10" />
+													<User2 className="w-10 h-10" />
 												</AvatarFallback>
 											</Avatar>
 											<div className="grid w-full max-w-sm items-center gap-1.5">
@@ -95,8 +119,8 @@ const ChangeNameForm = () => {
 							<Input disabled type="email" placeholder={user?.email} />
 						</div>
 
-						<Button type="submit" className="my-4">
-							Guardar
+						<Button type="submit" className="my-4 w-20" disabled={isLoading}>
+							{isLoading ? <LoaderCircle className="animate-spin" /> : "Guardar"}
 						</Button>
 					</form>
 				</Form>

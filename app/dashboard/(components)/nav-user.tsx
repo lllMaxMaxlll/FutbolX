@@ -1,4 +1,4 @@
-import { BadgeCheck, Bell, ChevronsUpDown, User } from "lucide-react";
+import { BadgeCheck, Bell, ChevronsUpDown, User2 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -11,13 +11,14 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
-import { useSession } from "@/context/SessionContext";
+// import { useSession } from "@/context/SessionContext";
 import SignOutButton from "@/app/(auth)/(components)/sign-out-button";
 import Link from "next/link";
+import { useUser } from "@/context/UserContext";
 
 export default function NavUser() {
 	const { isMobile } = useSidebar();
-	const { user } = useSession();
+	const { user } = useUser();
 
 	return (
 		<SidebarMenu>
@@ -28,7 +29,7 @@ export default function NavUser() {
 							<Avatar className="h-8 w-8 rounded-lg">
 								<AvatarImage src={""} alt={"User Name"} />
 								<AvatarFallback className="rounded-lg">
-									<User />
+									<User2 />
 								</AvatarFallback>
 							</Avatar>
 							<div className="grid flex-1 text-left text-sm leading-tight">
@@ -48,7 +49,7 @@ export default function NavUser() {
 								<Avatar className="h-8 w-8 rounded-lg">
 									<AvatarImage src={""} alt={"User name"} />
 									<AvatarFallback className="rounded-lg">
-										<User />
+										<User2 />
 									</AvatarFallback>
 								</Avatar>
 								<div className="grid flex-1 text-left text-sm leading-tight">

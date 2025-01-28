@@ -30,7 +30,6 @@ export default async function authMiddleware(request: NextRequest) {
 	if (session && inSignPage) {
 		return NextResponse.redirect(new URL("/dashboard", request.url));
 	}
-
 	return NextResponse.next();
 }
 

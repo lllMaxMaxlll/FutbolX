@@ -30,7 +30,7 @@ export default function SignUpForm() {
 		},
 	});
 
-	const onSubmit = async (values: z.infer<typeof registerFormSchema>) => {
+	async function onSubmit(values: z.infer<typeof registerFormSchema>) {
 		const { name, email, password } = values;
 
 		await authClient.signUp.email(
@@ -43,19 +43,20 @@ export default function SignUpForm() {
 			{
 				onRequest: () => {
 					setIsLoading(true);
-					toast("Creando usuario...");
+					toast.loading("Creando usuario...");
 				},
 				onSuccess: () => {
 					form.reset();
 					setIsLoading(false);
 				},
 				onError: (ctx) => {
+					console.log(ctx.error);
 					toast.error(getErrorMessage(ctx.error.code));
 					setIsLoading(false);
 				},
 			}
 		);
-	};
+	}
 
 	return (
 		<div className="flex min-h-[60vh] h-full w-full items-center justify-center px-4">

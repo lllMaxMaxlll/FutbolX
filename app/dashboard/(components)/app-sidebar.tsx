@@ -17,6 +17,9 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { User } from "@/types";
+import { useUser } from "@/context/UserContext";
+import { useEffect } from "react";
 
 const data = {
 	navMain: [
@@ -50,9 +53,15 @@ const data = {
 	],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ user }: { user: User }) {
+	const { setUser } = useUser();
+
+	useEffect(() => {
+		setUser(user);
+	}, [user, setUser]);
+
 	return (
-		<Sidebar variant="inset" {...props}>
+		<Sidebar variant="inset">
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>

@@ -5,11 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator";
 import ChangePasswordForm from "./change-password-form";
 import ChangeNameForm from "./change-name-form";
+import { useUser } from "@/context/UserContext";
 
-export function SettingsForm() {
+export default function SettingsForm() {
+	const { user } = useUser();
+
 	return (
 		<div className="space-y-6">
-			<ChangeNameForm />
+			<ChangeNameForm user={user} />
 			<Separator />
 			<ChangePasswordForm />
 			<Separator />

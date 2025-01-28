@@ -1,7 +1,7 @@
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-	baseURL: process.env.PUBLIC_URL,
+	baseURL: process.env.BETTER_AUTH_URL,
 });
 
 type ErrorTypes = Partial<Record<keyof typeof authClient.$ERROR_CODES, string>>;

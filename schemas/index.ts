@@ -24,19 +24,13 @@ export const registerFormSchema = z
 	});
 
 export const updateNameFormSchema = z.object({
-	name: z.string().min(2, {
-		message: "Name must be at least 2 characters.",
-	}),
+	name: z.string().min(2, { message: "Tu nombre debe tener al menos 2 caracteres" }),
 	image: z.string().optional(),
-	oldPassword: z.string().min(8, {
-		message: "Password must be at least 8 characters.",
-	}),
-	theme: z.enum(["light", "dark", "system"]),
 });
 
 export const updatePasswordFormSchema = z
 	.object({
-		oldPassword: z
+		currentPassword: z
 			.string()
 			.min(8, { message: "Tu contraseña debe contener al menos 8 caracteres" })
 			.regex(/[a-zA-Z0-9]/, { message: "Tu contraseña debe contener al menos un número" }),

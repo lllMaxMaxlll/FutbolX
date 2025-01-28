@@ -35,7 +35,7 @@ export default function SignInForm() {
 			{ email, password, callbackURL: "/dashboard" },
 			{
 				onRequest: () => {
-					toast("Iniciando sesion...");
+					toast.loading("Iniciando sesion...");
 					setIsLoading(true);
 				},
 				onSuccess: () => {

@@ -1,13 +1,20 @@
+"use client";
+
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
-import React from "react";
-import { LogOut } from "lucide-react";
+import React, { useState } from "react";
+import { LoaderCircle, LogOut } from "lucide-react";
 
 const SignOutButton = () => {
+	const [loading, isLoading] = useState(false);
 	const handleSignOut = async () => {
 		await authClient.signOut({
 			fetchOptions: {
+				onRequest: () => {
+					isLoading(true);
+				},
 				onSuccess: () => {
+					isLoading(false);
 					redirect("/sign-in");
 				},
 			},
@@ -15,9 +22,9 @@ const SignOutButton = () => {
 	};
 
 	return (
-		<div className="inline-flex gap-2 items-center" onClick={handleSignOut}>
+		<div className="inline-flex gap-2 items-center text-center" onClick={handleSignOut}>
 			<LogOut />
-			Cerrar sesion
+			{loading ? <LoaderCircle className="animate-spin" /> : <>Cerrar sesion</>}
 		</div>
 	);
 };
