@@ -10,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { forgotPasswordFormSchema } from "@/schemas";
-import { authClient } from "@/lib/auth-client";
+import { forgetPassword } from "@/lib/auth-client";
 
 export default function ForgotPasswordForm() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +25,7 @@ export default function ForgotPasswordForm() {
 	async function onSubmit(values: z.infer<typeof forgotPasswordFormSchema>) {
 		const { email } = values;
 
-		await authClient.forgetPassword(
+		await forgetPassword(
 			{
 				email,
 				redirectTo: "/reset-password",

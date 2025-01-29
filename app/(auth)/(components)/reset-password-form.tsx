@@ -11,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { resetPasswordForSchema } from "@/schemas";
-import { authClient } from "@/lib/auth-client";
+import { resetPassword } from "@/lib/auth-client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import InvalidToken from "./invalid-token";
 
@@ -31,7 +31,7 @@ function ResetPasswordForm() {
 
 	async function onSubmit(values: z.infer<typeof resetPasswordForSchema>) {
 		const { password } = values;
-		await authClient.resetPassword(
+		await resetPassword(
 			{
 				newPassword: password,
 				token: token || "",

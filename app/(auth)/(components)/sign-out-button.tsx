@@ -1,6 +1,6 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
+import { signOut } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { LoaderCircle, LogOut } from "lucide-react";
@@ -8,7 +8,7 @@ import { LoaderCircle, LogOut } from "lucide-react";
 const SignOutButton = () => {
 	const [loading, isLoading] = useState(false);
 	const handleSignOut = async () => {
-		await authClient.signOut({
+		await signOut({
 			fetchOptions: {
 				onRequest: () => {
 					isLoading(true);

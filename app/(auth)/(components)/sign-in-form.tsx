@@ -4,7 +4,7 @@ import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { authClient, getErrorMessage } from "@/lib/auth-client";
+import { getErrorMessage, signIn } from "@/lib/auth-client";
 
 import { toast } from "sonner";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -31,7 +31,7 @@ export default function SignInForm() {
 	const handleSignIn = async (values: z.infer<typeof loginFormSchema>) => {
 		const { email, password } = values;
 
-		await authClient.signIn.email(
+		await signIn.email(
 			{ email, password, callbackURL: "/dashboard" },
 			{
 				onRequest: () => {
@@ -48,6 +48,44 @@ export default function SignInForm() {
 			}
 		);
 	};
+
+	const handleSubmitGoogle = async () => {
+		await signIn.social(
+			{ provider: "google", callbackURL: "/dashboard" },
+			{
+				onRequest: () => {
+					setIsLoading(true);
+					toast("Iniciando sesion...");
+				},
+				onSuccess: () => {
+					form.reset();
+				},
+				onError: (ctx) => {
+					setIsLoading(false);
+					toast.error(getErrorMessage(ctx.error.code) ?? "Algo salió mal");
+				},
+			}
+		);
+	};
+
+	// const handleSubmitFacebook = async () => {
+	// 	await authClient.signIn.social(
+	// 		{ provider: "facebook", callbackURL: "/dashboard" },
+	// 		{
+	// 			onRequest: () => {
+	// 				setIsLoading(true);
+	// 				toast("Iniciando sesion...");
+	// 			},
+	// 			onSuccess: () => {
+	// 				form.reset();
+	// 			},
+	// 			onError: (ctx) => {
+	// 				setIsLoading(false);
+	// 				toast.error(getErrorMessage(ctx.error.code) ?? "Algo salió mal");
+	// 			},
+	// 		}
+	// 	);
+	// };
 
 	return (
 		<div className="flex flex-col min-h-[50vh] h-full w-full items-center justify-center px-4">
@@ -98,23 +136,23 @@ export default function SignInForm() {
 								<Button type="submit" className="w-full" disabled={isLoading}>
 									{isLoading ? <LoaderCircle className="animate-spin" /> : "Iniciar sesion"}
 								</Button>
-								<div className="grid grid-cols-3 gap-4">
-									<Button variant="outline" className="w-full" disabled>
-										<FaApple />
-										<span className="sr-only">Iniciar con Apple</span>
-									</Button>
-									<Button variant="outline" className="w-full">
-										<FaGoogle />
-										<span className="sr-only">Iniciar con Google</span>
-									</Button>
-									<Button variant="outline" className="w-full" disabled>
-										<FaFacebookF />
-										<span className="sr-only">Iniciar con Facebook</span>
-									</Button>
-								</div>
 							</div>
 						</form>
 					</Form>
+					<div className="grid grid-cols-3 gap-4 my-4">
+						<Button variant="outline" className="w-full" disabled>
+							<FaApple />
+							<span className="sr-only">Iniciar con Apple</span>
+						</Button>
+						<Button variant="outline" className="w-full" onClick={handleSubmitGoogle} disabled={isLoading}>
+							<FaGoogle />
+							<span className="sr-only">Iniciar con Google</span>
+						</Button>
+						<Button variant="outline" className="w-full" disabled>
+							<FaFacebookF />
+							<span className="sr-only">Iniciar con Facebook</span>
+						</Button>
+					</div>
 					<div className="mt-4 text-center text-sm">
 						No tenes cuenta?{" "}
 						<Link href="/sign-up" className="underline">

@@ -1,6 +1,6 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client"; //import the auth client
+import { signUp } from "@/lib/auth-client"; //import the auth client
 import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,7 +33,7 @@ export default function SignUpForm() {
 	async function onSubmit(values: z.infer<typeof registerFormSchema>) {
 		const { name, email, password } = values;
 
-		await authClient.signUp.email(
+		await signUp.email(
 			{
 				name,
 				email,
