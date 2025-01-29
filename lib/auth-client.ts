@@ -39,4 +39,4 @@ export const getErrorMessage = (code: string) => {
 	return "Hubo un error";
 };
 
-export const { signIn, signUp, useSession } = createAuthClient();
+export const { signIn, signUp, useSession, signOut, forgetPassword, resetPassword } = createAuthClient();
