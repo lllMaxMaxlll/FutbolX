@@ -1,4 +1,5 @@
 import { BadgeCheck, Bell, ChevronsUpDown, User2 } from "lucide-react";
+import { GrUserAdmin } from "react-icons/gr";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -60,6 +61,14 @@ export default function NavUser() {
 
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
+							{user?.role === "admin" && (
+								<Link href="/admin">
+									<DropdownMenuItem>
+										<GrUserAdmin />
+										Panel Admin
+									</DropdownMenuItem>
+								</Link>
+							)}
 							<Link href="/dashboard/settings">
 								<DropdownMenuItem>
 									<BadgeCheck />

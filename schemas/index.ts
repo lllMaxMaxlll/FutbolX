@@ -66,3 +66,13 @@ export const resetPasswordForSchema = z
 		message: "Las contraseñas no coinciden.",
 		path: ["confirmPassword"],
 	});
+
+export const createUserFormSchema = z.object({
+	name: z.string().min(2, { message: "Tu nombre debe tener al menos 2 caracteres" }),
+	email: z.string().email({ message: "Email invalido" }),
+	password: z
+		.string()
+		.min(8, { message: "Tu contraseña debe contener al menos 8 caracteres" })
+		.regex(/[a-zA-Z0-9]/, { message: "Tu contraseña debe contener al menos un número" }),
+	role: z.enum(["user", "admin"]).default("user"),
+});

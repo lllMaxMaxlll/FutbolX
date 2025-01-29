@@ -4,12 +4,13 @@ import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js"; // automatically set cookies
 // import { emailHarmony } from "better-auth-harmony"; //email normalization and additional validation, blocking temporary email domains.
 import { sendEmail } from "@/actions/emailActions";
+import { admin } from "better-auth/plugins";
 
 const prisma = new PrismaClient();
 
 export const auth = betterAuth({
 	secret: process.env.AUTH_SECRET,
-	plugins: [nextCookies()],
+	plugins: [nextCookies(), admin()],
 	database: prismaAdapter(prisma, {
 		provider: "postgresql",
 	}),
