@@ -23,6 +23,11 @@ export default async function authMiddleware(request: NextRequest) {
 		},
 	});
 
+	// Allow public access to the homepage `/`
+	if (pathname === "/") {
+		return NextResponse.next();
+	}
+
 	if (!session) {
 		if (inAuthRoutes || inPasswordRoutes) {
 			return NextResponse.next();
