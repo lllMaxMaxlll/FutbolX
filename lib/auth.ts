@@ -21,7 +21,7 @@ export const auth = betterAuth({
 			await sendEmail({
 				to: user.email,
 				subject: "Reestablecer contraseña",
-				text: `Click en el link para restablecer tu contraseña: ${url}`,
+				html: `<p>Click en el link para restablecer tu contraseña: <a href=${url}>Restablecer contraseña</a></p>`,
 			});
 		},
 	},
@@ -34,7 +34,7 @@ export const auth = betterAuth({
 			await sendEmail({
 				to: user.email,
 				subject: "Verifica tu email",
-				text: `Click en el link para verificar tu email: ${verificationUrl}`,
+				html: `<p>Click en el link para verificar tu email: <a href=${verificationUrl}>Verificar mail</a></p>`,
 			});
 		},
 	},

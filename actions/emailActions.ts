@@ -2,7 +2,7 @@
 
 import sgMail from "@sendgrid/mail";
 
-export async function sendEmail({ to, subject, text }: { to: string; subject: string; text: string }) {
+export async function sendEmail({ to, subject, html }: { to: string; subject: string; html: string }) {
 	if (!process.env.SENDGRID_API_KEY) {
 		throw new Error("SENDGRID_API_KEY no está definido.");
 	}
@@ -16,7 +16,7 @@ export async function sendEmail({ to, subject, text }: { to: string; subject: st
 		to: to.toLowerCase().trim(),
 		from: process.env.SENDGRID_FROM_EMAIL,
 		subject: subject.trim(),
-		text: text.trim(),
+		html,
 	};
 
 	try {
@@ -25,7 +25,7 @@ export async function sendEmail({ to, subject, text }: { to: string; subject: st
 		if (response.statusCode !== 202) {
 			throw new Error(`SendGrid API returned status code ${response.statusCode}`);
 		}
-		console.log("ALL GOOD");
+
 		return {
 			success: true,
 			messageId: response.headers["x-message-id"],
