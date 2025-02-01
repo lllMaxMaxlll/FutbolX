@@ -1,7 +1,7 @@
 import { AppSidebar } from "@/app/dashboard/(components)/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
-import type { Session, User } from "better-auth";
+import type { Session, User } from "@/types";
 import { headers } from "next/headers";
 import React from "react";
 import { UserProvider } from "@/context/UserContext";

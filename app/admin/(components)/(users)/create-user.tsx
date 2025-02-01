@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -12,9 +14,11 @@ import { toast } from "sonner";
 import { getErrorMessage } from "@/lib/auth-client";
 import { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useUsers } from "@/context/ListUsersContext";
 
 const CreateUserDialog = () => {
 	const [isLoading, setIsLoading] = useState(false);
+	const { refreshUsers } = useUsers();
 
 	const form = useForm<z.infer<typeof createUserFormSchema>>({
 		resolver: zodResolver(createUserFormSchema),
@@ -29,30 +33,34 @@ const CreateUserDialog = () => {
 	async function onSubmit(values: z.infer<typeof createUserFormSchema>) {
 		const { name, email, password, role } = values;
 
-		await authClient.admin.createUser(
-			{
-				name,
-				email,
-				password,
-				role,
-			},
-			{
-				onRequest: () => {
-					setIsLoading(true);
-					toast("Creando usuario...");
+		await authClient.admin
+			.createUser(
+				{
+					name,
+					email,
+					password,
+					role,
 				},
-				onSuccess: () => {
-					form.reset();
-					setIsLoading(false);
-					toast.success("Usuario creado correctamente.");
-				},
-				onError: (ctx) => {
-					console.log(ctx.error);
-					toast.error(getErrorMessage(ctx.error.code) ?? "Algo salió mal");
-					setIsLoading(false);
-				},
-			}
-		);
+				{
+					onRequest: () => {
+						setIsLoading(true);
+						toast("Creando usuario...");
+					},
+					onSuccess: () => {
+						form.reset();
+						setIsLoading(false);
+						toast.success("Usuario creado correctamente.");
+					},
+					onError: (ctx) => {
+						console.log(ctx.error);
+						toast.error(getErrorMessage(ctx.error.code) ?? "Algo salió mal");
+						setIsLoading(false);
+					},
+				}
+			)
+			.finally(() => {
+				refreshUsers();
+			});
 	}
 
 	return (
