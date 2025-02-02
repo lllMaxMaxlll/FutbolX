@@ -15,6 +15,7 @@ import { getErrorMessage } from "@/lib/auth-client";
 import { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useUsers } from "@/context/ListUsersContext";
+import { LoaderCircle } from "lucide-react";
 
 const CreateUserDialog = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -138,7 +139,7 @@ const CreateUserDialog = () => {
 
 						<DialogFooter>
 							<Button type="submit" disabled={isLoading}>
-								Crear usuario
+								{isLoading ? <LoaderCircle className="animate-spin" /> : "Crear usuario"}
 							</Button>
 						</DialogFooter>
 					</form>

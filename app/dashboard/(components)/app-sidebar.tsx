@@ -61,7 +61,7 @@ export function AppSidebar({ user }: { user: User }) {
 	}, [user, setUser]);
 
 	return (
-		<Sidebar variant="inset">
+		<Sidebar collapsible="icon" variant="inset">
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>

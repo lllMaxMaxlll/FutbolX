@@ -14,8 +14,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { registerFormSchema } from "@/schemas";
 import { useState } from "react";
-import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa6";
+
 import { LoaderCircle } from "lucide-react";
+import SocialMediaButtons from "./social-media-buttons";
 
 export default function SignUpForm() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -136,20 +137,9 @@ export default function SignUpForm() {
 							</div>
 						</form>
 					</Form>
-					<div className="grid grid-cols-3 gap-4 mt-4">
-						<Button variant="outline" className="w-full" disabled>
-							<FaApple />
-							<span className="sr-only">Registrarse con Apple</span>
-						</Button>
-						<Button variant="outline" className="w-full">
-							<FaGoogle />
-							<span className="sr-only">Registrarse con Google</span>
-						</Button>
-						<Button variant="outline" className="w-full" disabled>
-							<FaFacebookF />
-							<span className="sr-only">Registrarse con Facebook</span>
-						</Button>
-					</div>
+
+					<SocialMediaButtons />
+
 					<div className="mt-4 text-center text-sm">
 						Ya tenes cuenta?{" "}
 						<Link href="/sign-in" className="underline">
