@@ -16,8 +16,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "TourneyMate",
-	description: "Manage your amateur soccer tournaments with ease.",
+	title: "FutbolX - Organiza tus torneos de fútbol",
+	description:
+		"FutbolX es la plataforma definitiva para crear y gestionar torneos de fútbol. Organiza equipos, jugadores y partidos de manera fácil y rápida. Lleva la pasión del fútbol al siguiente nivel con FutbolX",
+	keywords: "fútbol, torneos, gestión de torneos, equipos, jugadores, ligas, organización de partidos, app de fútbol, FutbolX",
+	openGraph: {
+		title: "FutbolX - Organiza tus torneos de fútbol",
+		description:
+			"FutbolX es la plataforma definitiva para crear y gestionar torneos de fútbol. Organiza equipos, jugadores y partidos de manera fácil y rápida. Lleva la pasión del fútbol al siguiente nivel con FutbolX",
+		url: "XXXXXXXXXXXXXXXXXXXXXXXXXX",
+		siteName: "FutbolX",
+		images: [
+			{
+				url: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+				width: 1200,
+				height: 630,
+			},
+		],
+		locale: "es_ES",
+		type: "website",
+	},
 };
 
 export default async function RootLayout({

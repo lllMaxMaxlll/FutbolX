@@ -25,7 +25,7 @@ const ChangeNameForm = ({ user }: { user: User }) => {
 		resolver: zodResolver(updateNameFormSchema),
 		defaultValues: {
 			name: user?.name || "",
-			image: "",
+			image: user?.image || "",
 		},
 	});
 

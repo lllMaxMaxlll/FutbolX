@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Calendar, LifeBuoy, Send, Trophy, Users } from "lucide-react";
-import { PiSoccerBallFill } from "react-icons/pi";
 
 import NavMain from "./nav-main";
 import NavSecondary from "./nav-secondary";
@@ -20,6 +19,7 @@ import Link from "next/link";
 import { User } from "@/types";
 import { useUser } from "@/context/UserContext";
 import { useEffect } from "react";
+import Logo from "@/public/logo";
 
 const data = {
 	navMain: [
@@ -61,17 +61,17 @@ export function AppSidebar({ user }: { user: User }) {
 	}, [user, setUser]);
 
 	return (
-		<Sidebar collapsible="icon" variant="inset">
+		<Sidebar collapsible="icon" variant="floating">
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton size="lg" asChild>
 							<Link href="/dashboard">
-								<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-									<PiSoccerBallFill className="size-4" />
+								<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-primary-foreground">
+									<Logo />
 								</div>
 								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-semibold">TourneyMate</span>
+									<span className="truncate font-semibold">Futbol X</span>
 									<span className="truncate text-xs">Organiza tu torneo</span>
 								</div>
 							</Link>
